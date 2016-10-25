@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+  <style>
+  li{list-style: none;}
+.a1{
+      display:block;
+      width: 40px;
+      height: 40px;
+      text-decoration: none;
+      float:left;
+      margin-left: 4px;
+    }
+ .a2{
+   background-color:pink;
+ }
+ .a3{
+   background-color:teal;
+ }
+  </style>
+</head>
+<body>
+  <ul id='ul1'>
+      <li><a href="images/1.jpg">1</a></li>
+      <li><a href="images/2.jpg">2</a></li>
+      <li><a href="images/3.jpg">3</a></li>
+      <li><a href="images/4.jpg">4</a></li>
+  </ul>
+  <br>
+  <br>
+  <hr>
+  <img src="images/1.jpg" alt="" id ='img' >
+  <br>
+  <input id='left' type="button" value='<'><input id='right' type="button" value='>'>
+  <script>
+
+  function G(sId){
+     return document.getElementById(sId)
+  }
+
+  var img = G('img')
+  var aa =  document.getElementsByTagName('a')
+  var btn = document.getElementsByTagName('li')
+  var ul1 = G('ul1')
+  var left =G('left')
+  var right =G('right')
+
+  for(i in aa){
+
+    aa[i].className = 'a1'+ ' '+'a3'
+    aa[i].index =i
+    aa[i].onclick=function(e){
+      clearInterval(t);
+        n=this.index
+      t = setInterval(lun,2000)
+
+      e.preventDefault();
+      var src = this.getAttribute('href')
+      img.setAttribute('src',src)
+      for(var j=0;j<aa.length;j++){
+        aa[j].className = 'a1'+' '+'a3'
+      }
+      this.className = 'a1'+ ' '+'a2'
+    }
+  }
+  var n=0;
+  function lun(){
+    n++;
+    bgsrc = 'images/'+ n +'.jpg';
+    img.setAttribute('src',bgsrc)
+    for(var i =0;i<aa.length;i++){
+      aa[i].className = 'a1'+' '+'a3'
+    }
+    aa[n-1].className = 'a1'+ ' '+'a2'
+    if(n>=aa.length){
+        n=0;
+    }
+  }lun()
+  var t =setInterval(lun,2000)
+    img.onmouseover=function(){
+      clearInterval(t)
+  }
+    img.onmouseout=function(){
+
+      t = setInterval(lun,2000)
+
+  }
+  right.onclick = function(){
+    clearInterval(t);
+    t = setInterval(lun,2000)
+    if(n>=aa.length){
+        n=0;
+    }  
+    console.log(n)
+    n++;
+    bgsrc = 'images/'+ n +'.jpg';
+    img.setAttribute('src',bgsrc)
+    for(var i =0;i<aa.length;i++){
+      aa[i].className = 'a1'+' '+'a3'
+    }
+    aa[n-1].className = 'a1'+ ' '+'a2'
+       
+  }
+  left.onclick = function(){
+    clearInterval(t);
+    t = setInterval(lun,2000)
+    n--;
+    if(n<=0){
+        n=aa.length;
+    } 
+    console.log(n)    
+    bgsrc = 'images/'+ n+'.jpg';
+    img.setAttribute('src',bgsrc)
+    for(var i =0;i<aa.length;i++){
+      aa[i].className = 'a1'+' '+'a3'
+    }
+    aa[n-1].className = 'a1'+ ' '+'a2'
+    
+  }
+
+  </script>
+</body>
+</html>
